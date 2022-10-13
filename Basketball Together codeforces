@@ -1,0 +1,57 @@
+//Abhishek sophiya
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ 
+void func(){
+    int n,d;
+    cin>>n>>d;
+    vector<int>v;
+    for(int i=0;i<n;i++){
+        int a;
+        cin>>a;
+        v.push_back(a);
+    }
+ 
+    sort(v.begin(),v.end());
+    deque<int>dq;
+    deque<int>::iterator it = dq.begin();
+    ++it;
+    dq.insert(it, v.begin(), v.end());
+    // cout<<dq[n];
+    int k=n;
+    int win=0;
+    while(!dq.empty()){
+        int mx=dq[k];
+        
+        int div=d/mx; 
+        if(div>dq.size()-1){
+            div=dq.size()-1;
+        }       
+        if(dq.size()==1 && dq.front()<d){
+            break;
+        }
+        dq.pop_back();
+        if(mx*(div+1)>d || mx>d){
+        win++;
+        }
+        for(int i=0;i<div;i++){
+            if(!dq.empty()){
+            dq.pop_front();
+            }
+        }
+        k=k-(div+1);
+    }
+    cout<<win;
+}
+ 
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    // int tc;
+    // cin>>tc;
+    // while(tc--){
+        func();
+    // }
+    return 0;
+}
